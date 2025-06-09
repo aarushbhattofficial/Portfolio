@@ -13,7 +13,7 @@ import calendar
 import yfinance as yf
 from statsmodels.tsa.ar_model import AutoReg
 from nsetools import Nse
-
+from nsepython import nse_get_all_stock_codes
 
 st.title("Monte Carlo Simulation")
 st.subheader("Lognormal Mean-Reverting Stochastic Volatility Model for Option Pricing", divider='red')
@@ -101,8 +101,10 @@ with col2:
 #------------------------------------------------------------------------------
 
 # Fetching realtime parameters from NSE
-nse = Nse()
-all_stock_codes = nse.get_stock_codes()  # returns dict with symbol:name
+# nse = Nse()
+# all_stock_codes = nse.get_stock_codes()  # returns dict with symbol:name
+
+all_stock_codes = nse_get_all_stock_codes()
 
 # Convert dict keys (symbols) to tuple (excluding first key which is 'SYMBOL')
 nse_symbols = tuple(all_stock_codes)[1:]
