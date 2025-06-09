@@ -1,0 +1,24 @@
+streamlit
+
+# Basic
+pandas
+numpy
+scipy
+matplotlib
+pylatexenc
+jupyter
+ipython
+ipykernel
+datetime
+
+# Finance
+yfinance
+finta
+nsetools
+nsepy
+
+# ML
+gym 
+gym_anytrading
+stable_baselines3
+statsmodels
