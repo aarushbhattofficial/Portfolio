@@ -2,7 +2,7 @@ streamlit
 
 # Basic
 numpy
-matplotlib.pyplot
+matplotlib
 scipy
 pandas
 
