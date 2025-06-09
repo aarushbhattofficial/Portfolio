@@ -165,9 +165,6 @@ st.dataframe(df)
 
 # Simulate asset price path
 
-import numpy as np
-import matplotlib.pyplot as plt
-
 h=np.zeros(n+1)
 
 def simulate_asset_price_path(S0=S0, mu=μ, h_bar=h_bar, h0=h0,

@@ -3,24 +3,20 @@ streamlit
 # Basic
 numpy
 matplotlib.pyplot
-numpy.random
-scipy.stats
+scipy
 pandas
 datetime
 calendar
 
 # Finance
 yfinance
-statsmodels.tsa.ar_model
+statsmodels
 nsetools
 finta
 
 # Gym stuff
-import gym
-import gym_anytrading
-from gym_anytrading.envs import StocksEnv
+gym
+gym_anytrading
 
 # RL
-from stable_baselines3.common.vec_env import DummyVecEnv
-from stable_baselines3 import A2C
-from stable_baselines3.common.sb2_compat.rmsprop_tf_like import RMSpropTFLike
+stable_baselines3[extra]
