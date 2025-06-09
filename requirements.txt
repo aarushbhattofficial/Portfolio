@@ -5,8 +5,6 @@ numpy
 matplotlib.pyplot
 scipy
 pandas
-datetime
-calendar
 
 # Finance
 yfinance
