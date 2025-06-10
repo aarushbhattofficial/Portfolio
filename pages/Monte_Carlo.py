@@ -101,13 +101,9 @@ with col2:
 #------------------------------------------------------------------------------
 
 # Fetching realtime parameters from NSE
-# nse = Nse()
-# all_stock_codes = nse.get_stock_codes()  # returns dict with symbol:name
-
-all_stock_codes = nse_get_all_stock_codes()
-
-# Convert dict keys (symbols) to tuple (excluding first key which is 'SYMBOL')
-nse_symbols = tuple(k for k in all_stock_codes.keys() if k != 'SYMBOL')
+nse = Nse()
+all_stock_codes = nse.get_stock_codes()  # returns dict with symbol:name
+nse_symbols = tuple(all_stock_codes.keys())[1:]
 
 stock = st.sidebar.selectbox(
     "Select NSE stock",
