@@ -8,6 +8,8 @@ from scipy.stats import norm
 import pandas as pd
 import datetime
 import calendar
+import requests
+import io
 
 # Finance
 import yfinance as yf
@@ -100,9 +102,21 @@ with col2:
 #------------------------------------------------------------------------------
 
 # Fetching realtime parameters from NSE
-nse = Nse()
-all_stock_codes = nse.get_stock_codes()  # returns dict with symbol:name
-nse_symbols = tuple(all_stock_codes.keys())[1:]
+@st.cache_data
+def get_nse_symbols():
+    url = "https://www1.nseindia.com/content/equities/EQUITY_L.csv"
+    headers = {
+        "User-Agent": "Mozilla/5.0",
+        "Referer": "https://www.nseindia.com"
+    }
+    response = requests.get(url, headers=headers)
+    response.encoding = 'utf-8'
+    df = pd.read_csv(io.StringIO(response.text))
+    return df['SYMBOL'].tolist()
+
+# Fetch symbols
+nse_symbols = get_nse_symbols()
+
 
 stock = st.sidebar.selectbox(
     "Select NSE stock",
