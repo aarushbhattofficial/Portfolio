@@ -10,6 +10,7 @@ pandas
 yfinance
 statsmodels
 nsetools
+nsepython
 finta
 
 # Gym stuff

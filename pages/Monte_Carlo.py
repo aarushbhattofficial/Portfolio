@@ -107,7 +107,7 @@ with col2:
 all_stock_codes = nse_get_all_stock_codes()
 
 # Convert dict keys (symbols) to tuple (excluding first key which is 'SYMBOL')
-nse_symbols = tuple(all_stock_codes)[1:]
+nse_symbols = tuple(k for k in all_stock_codes.keys() if k != 'SYMBOL')
 
 stock = st.sidebar.selectbox(
     "Select NSE stock",
