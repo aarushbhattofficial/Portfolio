@@ -9,7 +9,6 @@ pandas
 # Finance
 yfinance
 statsmodels
-nsetools
 finta
 
 # Gym stuff

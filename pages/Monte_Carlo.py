@@ -8,13 +8,10 @@ from scipy.stats import norm
 import pandas as pd
 import datetime
 import calendar
-import requests
-import io
 
 # Finance
 import yfinance as yf
 from statsmodels.tsa.ar_model import AutoReg
-from nsetools import Nse
 
 st.title("Monte Carlo Simulation")
 st.subheader("Lognormal Mean-Reverting Stochastic Volatility Model for Option Pricing", divider='red')
@@ -102,20 +99,22 @@ with col2:
 #------------------------------------------------------------------------------
 
 # Fetching realtime parameters from NSE
-@st.cache_data
-def get_nse_symbols():
-    url = "https://www1.nseindia.com/content/equities/EQUITY_L.csv"
-    headers = {
-        "User-Agent": "Mozilla/5.0",
-        "Referer": "https://www.nseindia.com"
-    }
-    response = requests.get(url, headers=headers)
-    response.encoding = 'utf-8'
-    df = pd.read_csv(io.StringIO(response.text))
-    return df['SYMBOL'].tolist()
 
 # Fetch symbols
-nse_symbols = get_nse_symbols()
+nse_symbols = [
+    "ADANIENT.NS", "ADANIPORTS.NS", "APOLLOHOSP.NS", "ASIANPAINT.NS",
+    "AXISBANK.NS", "BAJAJ-AUTO.NS", "BAJFINANCE.NS", "BAJAJFINSV.NS",
+    "BEL.NS", "BHARTIARTL.NS", "CIPLA.NS", "COALINDIA.NS", "DRREDDY.NS",
+    "EICHERMOT.NS", "ETERNAL.NS", "GRASIM.NS", "HCLTECH.NS",
+    "HDFCBANK.NS", "HDFCLIFE.NS", "HEROMOTOCO.NS", "HINDALCO.NS",
+    "HINDUNILVR.NS", "ICICIBANK.NS", "INDUSINDBK.NS", "INFY.NS",
+    "ITC.NS", "JIOFIN.NS", "JSWSTEEL.NS", "KOTAKBANK.NS", "LT.NS",
+    "M&M.NS", "MARUTI.NS", "NESTLEIND.NS", "NTPC.NS", "ONGC.NS",
+    "POWERGRID.NS", "RELIANCE.NS", "SBILIFE.NS", "SBIN.NS",
+    "SUNPHARMA.NS", "TCS.NS", "TATACONSUM.NS", "TATAMOTORS.NS",
+    "TATASTEEL.NS", "TECHM.NS", "TITAN.NS", "TRENT.NS",
+    "ULTRACEMCO.NS", "WIPRO.NS"
+]
 
 
 stock = st.sidebar.selectbox(
@@ -124,7 +123,7 @@ stock = st.sidebar.selectbox(
 )
 
 # Define ticker and dates
-ticker = f"{stock}.NS"
+ticker = stock
 end_date = datetime.date.today()
 start_date = end_date - datetime.timedelta(days=252)  # 1 year ago
 

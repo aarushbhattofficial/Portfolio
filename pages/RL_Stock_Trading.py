@@ -18,27 +18,27 @@ from matplotlib import pyplot as plt
 #Quant Finance
 import yfinance as yf
 from finta import TA
-from nsetools import Nse
 #-----------------------------------------------
 
 st.title("Reinforcement Learning Model (A2C)")
 st.subheader("Stock Trading AI Agent", divider='red')
-nse = Nse()
-all_stock_codes = nse.get_stock_codes()  # returns dict with symbol:name
 
-# Convert dict keys (symbols) to tuple (excluding first key which is 'SYMBOL')
-nse_symbols = tuple(all_stock_codes)[1:]
+nse_symbols = [
+    "ADANIENT.NS", "ADANIPORTS.NS", "APOLLOHOSP.NS", "ASIANPAINT.NS",
+    "AXISBANK.NS", "BAJAJ-AUTO.NS", "BAJFINANCE.NS", "BAJAJFINSV.NS",
+    "BEL.NS", "BHARTIARTL.NS", "CIPLA.NS", "COALINDIA.NS", "DRREDDY.NS",
+    "EICHERMOT.NS", "ETERNAL.NS", "GRASIM.NS", "HCLTECH.NS",
+    "HDFCBANK.NS", "HDFCLIFE.NS", "HEROMOTOCO.NS", "HINDALCO.NS",
+    "HINDUNILVR.NS", "ICICIBANK.NS", "INDUSINDBK.NS", "INFY.NS",
+    "ITC.NS", "JIOFIN.NS", "JSWSTEEL.NS", "KOTAKBANK.NS", "LT.NS",
+    "M&M.NS", "MARUTI.NS", "NESTLEIND.NS", "NTPC.NS", "ONGC.NS",
+    "POWERGRID.NS", "RELIANCE.NS", "SBILIFE.NS", "SBIN.NS",
+    "SUNPHARMA.NS", "TCS.NS", "TATACONSUM.NS", "TATAMOTORS.NS",
+    "TATASTEEL.NS", "TECHM.NS", "TITAN.NS", "TRENT.NS",
+    "ULTRACEMCO.NS", "WIPRO.NS"
+]
 
 
-# url = "https://www1.nseindia.com/content/indices/ind_nifty50list.csv"
-
-# # NSE blocks non-browser requests unless headers are set
-# headers = {
-#     "User-Agent": "Mozilla/5.0"
-# }
-
-# df = pd.read_csv(url, headers=headers)
-# nse_symbols = tuple(df['Symbol'])
 
 stock = st.sidebar.selectbox(
     "Select NSE stock",
@@ -61,7 +61,7 @@ selected_display = st.sidebar.selectbox("Select time period for training", list(
 selected_period = period_display_map[selected_display]
 
 
-data = yf.Ticker(f"{stock}.NS").history(period=selected_period)
+data = yf.Ticker(stock).history(period=selected_period)
 data.drop(columns=['Dividends','Stock Splits'], inplace=True)
 
 # finta expects columns to be named: open, high, low, close, volume
