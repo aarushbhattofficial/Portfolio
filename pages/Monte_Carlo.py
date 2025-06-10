@@ -13,7 +13,6 @@ import calendar
 import yfinance as yf
 from statsmodels.tsa.ar_model import AutoReg
 from nsetools import Nse
-from nsepython import nse_get_all_stock_codes
 
 st.title("Monte Carlo Simulation")
 st.subheader("Lognormal Mean-Reverting Stochastic Volatility Model for Option Pricing", divider='red')
